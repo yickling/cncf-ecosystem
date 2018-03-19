@@ -1,3 +1,7 @@
+variable "deployment_type" {
+  type = "string"
+}
+
 resource "kubernetes_pod" "nginx" {
   metadata {
     name = "nginx-example"
@@ -33,6 +37,6 @@ resource "kubernetes_service" "nginx" {
       target_port = 80
     }
 
-    type = "NodePort"
+    type = "${ var.deployment_type == "local" ? "NodePort" : "LoadBalancer" }"
   }
 }

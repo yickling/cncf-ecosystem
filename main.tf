@@ -7,3 +7,23 @@ provider "kubernetes" {
   # client_key             = "${file("~/.minikube/apiserver.key")}"
   # cluster_ca_certificate = "${file("~/.minikube/ca.pem")}"
 }
+
+module "fluentd" {
+  source = "./fluentd"
+  deployment_type = "${var.deployment_type}"
+}
+
+module "prometheus" {
+  source = "./prometheus"
+  # deployment_type = "${var.deployment_type}"
+}
+
+module "jaeger" {
+  source = "./jaeger"
+  # deployment_type = "${var.deployment_type}"
+}
+
+module "localstack" {
+  source = "./localstack"
+  deployment_type = "${var.deployment_type}"
+}
